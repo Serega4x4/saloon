@@ -18,8 +18,8 @@ def about(request):
     return HttpResponse("<h1>О нас</h1>")
 
 
-def photo(request):
-    return HttpResponse("<h1>тут должно быть фото</h1>")
+def photo(request, slug_id):
+    return HttpResponse(f"<h1>Наши работы</h1><p> Мастер: {slug_id}</p>")
 
 
 def contacts(request):
