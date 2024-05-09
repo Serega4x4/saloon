@@ -5,7 +5,7 @@ from django.template.loader import render_to_string
 
 from nails.models import Master
 
-menu = {"главная", "О нас", "Наши работы", "Контакты"}
+menu = {"главная", "О нас", "Наши работы", "Связь с нами"}
 
 
 def main(request):
@@ -34,7 +34,7 @@ def about(request):
     return render(request, 'nails/about.html', context=data)
 
 
-def photo(request):
+def our_works(request):
     data = {
         'title': 'Наши работы',
         'menu': menu
@@ -43,7 +43,11 @@ def photo(request):
 
 
 def contacts(request):
-    return HttpResponse("<h1>Наши контакты</h1>")
+    data = {
+        'title': 'Связь с нами',
+        'menu': menu
+    }
+    return render(request, 'nails/contacts.html', context=data)
 
 
 def page_not_found(request, exception):
