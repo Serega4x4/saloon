@@ -1,11 +1,12 @@
 {% load static %}
-
+{% load nails_tags %}
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
     <title>{{ title }}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link type="text/css" href="{%static 'nails/css/styles.css'%}" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 <ul>
@@ -15,6 +16,40 @@
     </li>
     {% endfor %}
 </ul>
+<table class="table-page" border=0 cellpadding="0" cellspacing="0">
+<tr><td valign=top>
+    {% block mainmenu %}
+		<div class="header">
+			<ul id="mainmenu" class="mainmenu">
+			<li class="logo"><a href="{% url 'main' %}"><div class="logo"></div></a></li>
+{% for m in mainmenu %}
+	<li><a href="{% url m.url_name %}">{{m.title}}</a></li>
+{% endfor %}
+</ul>
+			<div class="clear"></div>
+		</div>
+{% endblock mainmenu %}
+    <table class="table-content" border=0 cellpadding="0" cellspacing="0">
+<tr>
 {% block content %} {% endblock %}
+<!-- Sidebar слева -->
+    <td valign="top" class="left-chapters">
+	<ul id="leftchapters">
+        {% if mas_selected == 0 or mas_selected is None %}
+        <li class="selected">Все услуги</li>
+        {% else %}
+        <li><a href="{% url 'main' %}">Все услуги</a> </li>
+        {% endif %}
+
+        {% show_masters mas_selected %}
+
+    </ul>
+    </td>
+</td></tr>
+    <tr><td valign=top>
+	<div id="footer">
+		<p></p>
+	</div>
+</td></tr></table>
 </body>
 </html>

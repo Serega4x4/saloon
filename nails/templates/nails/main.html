@@ -1,5 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>{{ title }}</h1>
+<ul class="list-articles">
+    <h1>{{ title }}</h1>
+    {% for m in main %}
+        <li><div class="article-panel">
+            <div class="list-articles">
+                <p class="first">Мастер: {{ m.title }} | Описание: {{ m.description|default:"неизвестно" }}</p>
+            </div>
+{% endfor %}
 
 {% endblock %}
