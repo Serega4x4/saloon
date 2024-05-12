@@ -25,7 +25,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'nails.apps.NailsConfig'
+    'django_extensions',
+    'nails.apps.NailsConfig',
 ]
 
 MIDDLEWARE = [

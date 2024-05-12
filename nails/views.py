@@ -61,6 +61,7 @@ def show_masters(request, mas_id):
 def about(request):
     data = {
         'title': 'О нас',
+        'main': data_db,
         'menu': menu
     }
     return render(request, 'nails/about.html', context=data)
@@ -69,6 +70,7 @@ def about(request):
 def our_works(request):
     data = {
         'title': 'Наши работы',
+        'main': data_db,
         'menu': menu
     }
     return render(request, 'nails/our_works.html', context=data)
@@ -77,6 +79,7 @@ def our_works(request):
 def contacts(request):
     data = {
         'title': 'Связь с нами',
+        'main': data_db,
         'menu': menu
     }
     return render(request, 'nails/contacts.html', context=data)
@@ -85,6 +88,7 @@ def contacts(request):
 def login(request):
     data = {
         'title': 'Войти',
+        'main': data_db,
         'menu': menu
     }
     return render(request, 'nails/login.html', context=data)
