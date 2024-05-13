@@ -1,8 +1,7 @@
 from django.http import HttpResponse, HttpResponseNotFound
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views.generic import TemplateView
 from django.template.loader import render_to_string
-
 from nails.models import Master
 
 
@@ -16,9 +15,9 @@ menu = [
 
 
 data_db = [
-    {'id': 1, 'title': 'Быкова Юлия', 'description': '<h1>Быкова Юлия - жена Гриши</h1>', 'is_published': True},
-    {'id': 1, 'title': 'Казакова Ольга', 'description': '<h1>Казакова Ольга - жена Миши/h1>', 'is_published': True},
-    {'id': 1, 'title': 'Краковска Агата', 'description': '<h1>Краковска Агата - моя женая</h1>', 'is_published': True},
+    {'id': 1, 'title': 'Быкова Юлия', 'description': 'Быкова Юлия - жена Гриши', 'is_published': True},
+    {'id': 1, 'title': 'Казакова Ольга', 'description': 'Казакова Ольга - жена Миши', 'is_published': True},
+    {'id': 1, 'title': 'Краковска Агата', 'description': 'Краковска Агата - моя женая', 'is_published': True},
 ]
 
 master_db = [
@@ -30,10 +29,11 @@ master_db = [
 
 
 def main(request):
+    master = Master.objects.filter(is_published=1)
     data = {
         'title': 'Главная',
         'menu': menu,
-        'main': data_db,
+        'master': master,
         'mas_selected': 0,
     }
     return render(request, 'nails/main.html', data)
@@ -48,14 +48,15 @@ def main(request):
 #     def get_queryset(self):
 #         return Master.objects.all()
 
-def show_masters(request, mas_id):
+def show_masters(request, mas_slug):
+    master = get_object_or_404(Master, slug=mas_slug)
     data = {
-        'title': 'Наши мастера',
+        'title': master.first_name,
         'menu': menu,
-        'main': data_db,
-        'mas_selected': mas_id,
+        'master': master,
+        'mas_selected': 1,
     }
-    return render(request, 'nails/main.html', data)
+    return render(request, 'nails/masters.html', data)
 
 
 def about(request):
