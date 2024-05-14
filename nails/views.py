@@ -29,7 +29,7 @@ master_db = [
 
 
 def main(request):
-    master = Master.objects.filter(is_published=1)
+    master = Master.published.all()
     data = {
         'title': 'Главная',
         'menu': menu,
@@ -38,15 +38,6 @@ def main(request):
     }
     return render(request, 'nails/main.html', data)
 
-
-# class Main(TemplateView):
-#     template_name = 'main.html'
-#     context_object_name = 'main'
-#     title_page = 'У Юли'
-#     cat_selected = 0
-#
-#     def get_queryset(self):
-#         return Master.objects.all()
 
 def show_masters(request, mas_slug):
     master = get_object_or_404(Master, slug=mas_slug)
