@@ -3,7 +3,11 @@
 {% block content %}
 <ul class="list-articles">
 	{% for m in master %}
-	<li><h2>{{ m.first_name }} {{ m.second_name }}</h2>
+	<li><div class="article-panel">
+		<p class="first">Вид услуги: {{ m.service.name }}</p>
+		<p class="last">Дата: {{ m.time_update|date:"d-m-Y H:m:s" }}</p>
+	</div>
+		<h2>{{ m.first_name }} {{ m.second_name }}</h2>
     {% autoescape off %}
 	{{p.content|linebreaks|truncatewords:40}}
     {% endautoescape %}

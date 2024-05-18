@@ -37,7 +37,7 @@ class Master(models.Model):
         ]
 
     def get_absolute_url(self):
-        return reverse('masters', kwargs={'mas_slug': self.slug})
+        return reverse('masters', kwargs={'master_slug': self.slug})
 
 
 class Service(models.Model):
@@ -46,3 +46,6 @@ class Service(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('masters', kwargs={'master_slug': self.slug})

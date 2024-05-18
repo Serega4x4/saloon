@@ -2,6 +2,6 @@
 {% if mas.id == mas_selected %}
 <li class="selected">{{mas.name}}</li>
 {% else %}
-<li><a href="{% url 'masters' mas.id %}">{{ mas.name }}</a> </li>
+<li><a href="{{ mas.get_absolute_url }}">{{ mas.name }}</a> </li>
 {% endif %}
 {% endfor %}

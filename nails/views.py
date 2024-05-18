@@ -2,8 +2,7 @@ from django.http import HttpResponse, HttpResponseNotFound
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import TemplateView
 from django.template.loader import render_to_string
-from nails.models import Master
-
+from nails.models import Master, Service
 
 menu = [
     {'title': 'Главная', 'url_name': 'main'},
@@ -20,13 +19,6 @@ data_db = [
     {'id': 1, 'title': 'Краковска Агата', 'description': 'Краковска Агата - моя женая', 'is_published': True},
 ]
 
-master_db = [
-    {'id': 1, 'name': 'Ногти'},
-    {'id': 2, 'name': 'Ресницы'},
-    {'id': 3, 'name': 'Брови'},
-    {'id': 4, 'name': 'Макияж'},
-]
-
 
 def main(request):
     master = Master.published.all()
@@ -39,13 +31,14 @@ def main(request):
     return render(request, 'nails/main.html', data)
 
 
-def show_masters(request, mas_slug):
-    master = get_object_or_404(Master, slug=mas_slug)
+def show_masters(request, master_slug):
+    master = get_object_or_404(Service, slug=master_slug)
+    service = Master.published.filter(service_id=master.pk)
     data = {
-        'title': master.first_name,
+        'title': f'Вид услуги: {master.name}',
         'menu': menu,
-        'master': master,
-        'mas_selected': 1,
+        'master': service,
+        'service_selected': master.pk,
     }
     return render(request, 'nails/masters.html', data)
 
