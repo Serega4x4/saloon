@@ -2,7 +2,7 @@ from django.http import HttpResponse, HttpResponseNotFound
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import TemplateView
 from django.template.loader import render_to_string
-from nails.models import Master, Service
+from nails.models import Master, Service, TagMaster
 
 menu = [
     {'title': 'Главная', 'url_name': 'main'},
@@ -81,3 +81,17 @@ def login(request):
 
 def page_not_found(request, exception):
     return HttpResponseNotFound("<h1>Сраница не найдена</h1>")
+
+
+def show_tag_master_list(request, tag_slug):
+    tag = get_object_or_404(TagMaster, slug=tag_slug)
+    service = tag.tags.filter(is_published=Master.Status.PUBLISHED)
+
+    data = {
+        'title': f"Услуга: {tag.tag}",
+        'menu': menu,
+        'service': service,
+        'service_selected': None,
+    }
+
+    return render(request, 'nails/main.html', context=data)

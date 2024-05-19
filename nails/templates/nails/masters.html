@@ -1,7 +1,21 @@
 {% extends 'base.html' %}
 
+{% block breadcrumbs %}
+{% with service.tags.all as tags %}
+{% if tags %}
+
+<ul class="tags-list">
+    <li>Сервис:</li>
+    {% for t in tags %}
+    <li><a href="{{ t.get_absolute_url }}">{{ t.tag }}</a> </li>
+    {% endfor %}
+</ul>
+
+{% endif %}
+{% endwith %}
+
 {% block content %}
-<h1> {{ master.first_name }} {{ master.second_name }} </h1>
+<h1> {{ master.name }} </h1>
 
 {% if master.photo %}
 <p><img class="img-article-left" scr="{{ masters.photo.url }}"</p>

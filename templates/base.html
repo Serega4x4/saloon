@@ -35,18 +35,23 @@
 <!-- Sidebar слева -->
     <td valign="top" class="left-chapters">
 	<ul id="leftchapters">
-        {% if mas_selected == 0 or mas_selected is None %}
+        {% if mas_selected == 0 %}
         <li class="selected">Все услуги</li>
         {% else %}
         <li><a href="{% url 'main' %}">Все услуги</a> </li>
         {% endif %}
 
         {% show_masters mas_selected %}
+        <li class="share"><a class="share-yt" href="{{ title }}">{{ title }}</a>
+        </li>
 
+        <li>{% show_all_tags %}</li>
     </ul>
     </td>
 </td></tr>
-    <tr><td valign=top>
+    <tr><td valign=top class="content">
+        {% block breadcrumbs %}
+        {% endblock %}
 	<div id="footer">
 		<p></p>
 	</div>

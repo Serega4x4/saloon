@@ -9,4 +9,5 @@ urlpatterns = [
     path('contacts/', views.contacts, name='contacts'),
     path('login', views.login, name='login'),
     path('masters/<slug:master_slug>/', views.show_masters, name='masters'),
+    path('tag/<slug:tag_slug>/', views.show_tag_master_list, name='tag'),
 ]
