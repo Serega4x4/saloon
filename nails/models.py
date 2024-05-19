@@ -23,6 +23,7 @@ class Master(models.Model):
     photo = models.ImageField(upload_to='photos/%Y/%m/%d', default=None, blank=True,
                               null=True, verbose_name="Фото мастера")
     service = models.ForeignKey('Service', on_delete=models.PROTECT)
+    tags = models.ManyToManyField('TagMaster', blank=True, related_name='tags')
 
     objects = models.Manager()
     published = PublishedManager()
@@ -49,3 +50,12 @@ class Service(models.Model):
 
     def get_absolute_url(self):
         return reverse('masters', kwargs={'master_slug': self.slug})
+
+
+class TagMaster(models.Model):
+    tag = models.CharField(max_length=100, db_index=True)
+    slug = models.SlugField(max_length=250, unique=True, db_index=True)
+
+    def __str__(self):
+        return self.tag
+
